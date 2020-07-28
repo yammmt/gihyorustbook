@@ -1,0 +1,19 @@
+[package]
+name = "cli"
+version = "0.1.0"
+authors = ["yammmt <cu.cs.y20@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+api = {path = "../api"}
+clap = "2"
+csv = "1"
+reqwest = "0.9"
+serde = "1"
+serde_json = "1"
+
+[dependencies.chrono]
+features = ["serde"]
+version = "0.4"
