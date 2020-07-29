@@ -8,7 +8,7 @@ use diesel::pg::PgConnection;
 use futures::prelude::*;
 use itertools::Itertools;
 use log::debug;
-use std::io::{self, prelude::*};
+use std::io::{self, prelude::*, Seek, SeekFrom};
 
 async fn load_file(conn: &PgConnection, file: impl Read) -> Result<usize> {
     use crate::model::NewLog;
@@ -54,7 +54,8 @@ pub async fn handle_post_csv(
             continue;
         }
 
-        // FIXME: これで `curl -F` 経由のファイルがスキップされる
+        // これで `curl -F` 経由のファイルがスキップされる
+        // disposition が FormData になっているため
         if !field
             .content_disposition()
             .map(|c| c.is_attachment())
@@ -72,6 +73,7 @@ pub async fn handle_post_csv(
             // blocking
             file.write(&data).map_err(ErrorInternalServerError)?;
         }
+        file.seek(SeekFrom::Start(0)).unwrap();
         // 書き出したデータを DB にロードする
         // blocking
         let file = file.into_inner().map_err(ErrorInternalServerError)?;

@@ -46,10 +46,8 @@ curl -v -H 'Content-Type: application/json' \
 
 あるいは `text.csv` のあるところで
 
-:warning: なぜか動作しない
-
 ```console
-curl -F 'file=@test.csv;type=text/csv' http://localhost:3000/csv
+curl -H "Content-Type: text/csv" -F 'file=@test.csv;type=text/csv' http://localhost:3000/csv
 ```
 
 ### DB 見る
