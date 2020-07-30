@@ -72,11 +72,15 @@ log_collector=# select * from logs;
 
 ### 圧縮済受け取る
 
-:warning: なぜか動作しない
+```console
+curl -H 'Accept-Encoding: gzip' http://localhost:3000/csv > response.csv.gz
+file response.csv.gz
+```
+
+gzip ファイルを解凍したければ
 
 ```console
-curl -H 'Accept-Encoding: deflate, gzip' http://localhost:3000/csv > response.csv.gz
-file response.csv.gz
+gunzip response.csv.gz
 ```
 
 ### CLI ツール
