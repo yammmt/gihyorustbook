@@ -1,0 +1,11 @@
+[package]
+name = "cffi-ownership"
+version = "0.1.0"
+authors = ["yammmt <cu.cs.y20@gmail.com>"]
+edition = "2018"
+
+[build-dependencies]
+cc = "1.0.59"
+
+[dependencies]
+libc = "0.2.76"
